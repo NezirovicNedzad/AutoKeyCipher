@@ -1,0 +1,150 @@
+﻿<UserControl x:Class="AutoKeyCipher.Views.ProfilePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutoKeyCipher.Views"
+             xmlns:Menu="clr-namespace:AutoKeyCipher.Utilities"
+             mc:Ignorable="d" 
+            
+           Background="Transparent"   
+             
+             d:DesignHeight="600" d:DesignWidth="850">
+    <Grid>
+
+
+        <Border Background="White" CornerRadius="20"/>
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid HorizontalAlignment="Left" Width="228">
+
+                <Border Background="#272B2F" CornerRadius="20,0,0,0"/>
+                <StackPanel Height="400">
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}" IsChecked="True">
+
+                        <Grid>
+                            <Image Source="{StaticResource home}" Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Home" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+
+                    </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}"  Command="{Binding ListCommand}" >
+
+                        <Grid>
+                            <Image Source="{StaticResource lista}" Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Lista pretraga" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+
+
+                    </Menu:Btn>
+                    
+                    
+                    
+                    <Menu:Btn Style="{StaticResource BtnStyle}">
+
+                        <Grid>
+                            <Image Source="{StaticResource setting}" Style="{StaticResource Image_Style}" />
+                            <TextBlock Text="Autokey" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+
+                    </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}">
+
+                        <Grid>
+                            <Image Source="{StaticResource logout}" Style="{StaticResource Image_Style}" />
+                            <TextBlock Text="Log out" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+
+                    </Menu:Btn>
+
+
+                </StackPanel>
+
+
+
+
+            </Grid>
+            <Grid Grid.Column="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="AutoKeyCipher" Margin="10" HorizontalAlignment="Center"  Style="{StaticResource Cipher}"/>
+
+
+                <Grid Grid.Row="1">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        
+                    </Grid.RowDefinitions>
+
+
+                    <TextBlock Grid.Row="0" Text="Unesite text za prevodjenje: " Foreground="Black" FontSize="17" HorizontalAlignment="Center"  />
+                    <TextBox Grid.Row="1" Width="250" Height="100" Text="{Binding Plaintext}" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Unesite key(manje duzine od texta)s: " Foreground="Black" FontSize="17" HorizontalAlignment="Center"  />
+                    <TextBox Grid.Row="1" Grid.Column="1" Width="150" Height="30"  Text="{Binding Key}" />
+                    <Button Command="{Binding StartDecodingCommand}" Grid.Column="1" Grid.Row="2" Width="150" FontSize="13"  Content="Start"     />
+
+
+                    <Grid Grid.Row="3"  Margin="0 20 0 0" Grid.ColumnSpan="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Grid  Grid.Row="0" Grid.Column="1">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Autokey" FontSize="15"  Margin="0 10 0 0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding AutoKey}" Margin="0 10 0 0" FontSize="15"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="PlaintText"  Margin="0 10 0 0"  FontSize="15"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PlaintextUpper}" Margin="0 10 0 0"  FontSize="15"/>
+                        </Grid>
+                        
+
+                    </Grid>
+                  
+                </Grid>
+                
+            </Grid>
+            
+            
+        </Grid>
+
+
+
+    </Grid>
+</UserControl>

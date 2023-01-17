@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\Rubik-Medium.ttf" />
+    <None Remove="Fonts\Rubik-Regular.ttf" />
+    <None Remove="Images\Home2.png" />
+    <None Remove="Images\img_order.png" />
+    <None Remove="Images\img_setting.png" />
+    <None Remove="Images\Login2.jpg" />
+    <None Remove="Images\shutdown_def.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Fonts\Rubik-Medium.ttf" />
+    <Resource Include="Fonts\Rubik-Regular.ttf" />
+    <Resource Include="Images\Home2.png" />
+    <Resource Include="Images\img_order.png" />
+    <Resource Include="Images\img_setting.png" />
+    <Resource Include="Images\Login2.jpg" />
+    <Resource Include="Images\shutdown_def.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
