@@ -32,9 +32,13 @@ namespace AutoKeyCipher.Commands
             newKey = newKey.Substring(0, newKey.Length
             - _viewModel.Key.Length);
 
-            newKey.Replace(" ", "");
-            _viewModel.AutoKey=newKey.ToUpper();
+        
+          string k=newKey.Replace(" ", "");
+            k = k.Substring(0,k.Length);
+            _viewModel.AutoKey=k.ToUpper();
             _viewModel.PlaintextUpper = _viewModel.Plaintext.ToUpper().Replace(" ", "");
+
+           
             
 
         }

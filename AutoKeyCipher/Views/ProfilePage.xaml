@@ -98,8 +98,8 @@
                     <TextBlock Grid.Row="0" Text="Unesite text za prevodjenje: " Foreground="Black" FontSize="17" HorizontalAlignment="Center"  />
                     <TextBox Grid.Row="1" Width="250" Height="100" Text="{Binding Plaintext}" />
                     <TextBlock Grid.Row="0" Grid.Column="1" Text="Unesite key(manje duzine od texta)s: " Foreground="Black" FontSize="17" HorizontalAlignment="Center"  />
-                    <TextBox Grid.Row="1" Grid.Column="1" Width="150" Height="30"  Text="{Binding Key}" />
-                    <Button Command="{Binding StartDecodingCommand}" Grid.Column="1" Grid.Row="2" Width="150" FontSize="13"  Content="Start"     />
+                    <TextBox Grid.Row="1" Grid.Column="1" Width="150"  Height="30"  Text="{Binding Key}" />
+                    <Button Click="Button_Click_1" Command="{Binding StartDecodingCommand}" Grid.Column="1" Grid.Row="2" Width="150" FontSize="13"  Content="Start"     />
 
 
                     <Grid Grid.Row="3"  Margin="0 20 0 0" Grid.ColumnSpan="12">
@@ -114,12 +114,27 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
+                        <Grid Grid.Column="0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <Button x:Name="StepOver" Click="StepOver_Click" Content="StepOver" Width="70" Height="40" HorizontalAlignment="Left" Background="Red" Foreground="White" Visibility="Hidden" />
+                            <TextBlock Visibility="Hidden" x:Name="t" Grid.Column="1" Margin="5" Text="Dekodiran text"/>
+                            <TextBlock  x:Name="dekodiran" Margin="5"  Grid.Column="1" Grid.Row="1"/>
+                        </Grid>
 
                         <Grid  Grid.Row="0" Grid.Column="1">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"></RowDefinition>
@@ -129,14 +144,44 @@
                                 
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Autokey" FontSize="15"  Margin="0 10 0 0"/>
-                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding AutoKey}" Margin="0 10 0 0" FontSize="15"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="Autokey" Text="{Binding AutoKey}" Margin="0 10 0 0" FontSize="15"/>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="PlaintText"  Margin="0 10 0 0"  FontSize="15"/>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PlaintextUpper}" Margin="0 10 0 0"  FontSize="15"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="PlainText" Text="{Binding PlaintextUpper}" Margin="0 10 0 0"  FontSize="15"/>
                         </Grid>
-                        
 
+
+                        
                     </Grid>
                   
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="0 12 0 0">
+
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button x:Name="StartD" Visibility="Hidden" Click="Button_Click" Grid.Column="1" Margin="0 12 0 0 " Padding="10" Height="45"   Content="CipherStart"     />
+                    
+                    <Grid Grid.Row="1" Margin="0 10 10 0">
+
+                        <Border x:Name="Bord" Visibility="Hidden" BorderBrush="Black" BorderThickness="2">
+                            <Grid x:Name="MatrixGrid" Margin="40 10 40 10"   >
+                            
+
+                            
+
+                        </Grid>
+                        </Border>
+
+                       
+
+                    </Grid>
                 </Grid>
                 
             </Grid>

@@ -1,10 +1,13 @@
 ﻿using AutoKeyCipher.Commands;
+using AutoKeyCipher.Models;
 using AutoKeyCipher.Services;
+using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace AutoKeyCipher.ViewModels
@@ -15,7 +18,14 @@ namespace AutoKeyCipher.ViewModels
  
 
         public ICommand ListCommand { get; }
-        public ICommand StartDecodingCommand { get; }  
+        public ICommand StartDecodingCommand { get; }
+
+
+
+        
+       
+
+      
 
         public ProfilePageViewModel(NavigationService allListingViewNavigationService)
 
