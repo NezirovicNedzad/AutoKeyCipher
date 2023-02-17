@@ -35,6 +35,8 @@ namespace AutoKeyCipher.Commands
         
           string k=newKey.Replace(" ", "");
             k = k.Substring(0,k.Length);
+
+           
             _viewModel.AutoKey=k.ToUpper();
             _viewModel.PlaintextUpper = _viewModel.Plaintext.ToUpper().Replace(" ", "");
 

@@ -96,7 +96,9 @@ namespace AutoKeyCipher.Views
             Bord.Visibility = Visibility.Visible;
             StartD.Visibility = Visibility.Collapsed;   
             StepOver.Visibility = Visibility.Visible;
+            Skip.Visibility = Visibility.Visible; 
             t.Visibility = Visibility.Visible;
+            Start.Visibility=Visibility.Collapsed;  
             CreateMatrix();
 
         }
@@ -104,8 +106,28 @@ namespace AutoKeyCipher.Views
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
-            StartD.Visibility=Visibility.Visible;   
 
+            string plainText = Pltxt.Text;  
+            string autoKey = Keytxt.Text;
+            int len = plainText.Length;
+
+            // generating the keystream
+            string newKey = autoKey + plainText;
+            newKey = newKey.Substring(0, newKey.Length
+            - autoKey.Length);
+
+
+            string k = newKey.Replace(" ", "");
+            k = k.Substring(0, k.Length);
+
+            Autokey.Text = k.ToUpper();
+            PlainText.Text = plainText.ToUpper().Replace(" ", "");
+
+
+
+
+            
+            StartD.Visibility = Visibility.Visible;
         }
 
         public void vratiPoz()
@@ -120,7 +142,7 @@ namespace AutoKeyCipher.Views
                 int first = alphabet.IndexOf(plainText[brojac])+1;//index vrste
                 int second = alphabet.IndexOf(autokey[brojac]);//index kol
 
-
+             
                 vrsta = first;
                 kolona = second+1;
 
@@ -129,9 +151,136 @@ namespace AutoKeyCipher.Views
                 encrypt += alphabet[index];
 
 
+                 
+                
 
                 brojac += 1;
+               
+
+
             }
+
+        }
+
+        private async void Skip_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            string m = " ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+           "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            char[] characters = m.ToCharArray();
+
+
+            int brojVrsta = 27;
+            int brojKolona = 27;
+            char[,] dvodi = new char[brojVrsta, brojKolona];
+
+            int brojac = 0;
+            for (int i = 0; i < brojVrsta; i++)
+            {
+                for (int j = 0; j < brojKolona; j++)
+                {
+                    dvodi[i, j] = characters[brojac];
+                    brojac++;
+                }
+            }
+            // dodavanje elemenata u matricu
+            string l = PlainText.Text;
+            vratiPoz();
+
+
+            for (int k = 0; k < l.Length; k++)
+            {
+
+
+                for (int i = 0; i < 27; i++)
+                {
+                    for (int j = 0; j < 27; j++)
+                    {
+                        if (i == vrsta && j == kolona)
+                        {
+
+
+
+                            TextBlock T = new TextBlock();
+
+                            T.FontSize = 9;
+
+                            T.Text = $"{dvodi[i, j - 1]}";
+                            T.Foreground = Brushes.White;
+                            T.Background = Brushes.Red;
+
+
+
+
+
+
+                            Grid.SetRow(T, i);
+
+                            Grid.SetColumn(T, j);
+
+
+                            MatrixGrid.Children.Add(T);
+
+
+
+                        }
+                        if (i == 0 && j == kolona)
+                        {
+                            TextBlock T = new TextBlock();
+
+                            T.FontSize = 9;
+
+                            T.Text = $"{dvodi[i, j]}";
+                            T.Foreground = Brushes.White;
+                            T.Background = Brushes.Cyan;
+                            Grid.SetRow(T, i);
+
+                            Grid.SetColumn(T, j);
+
+
+                            MatrixGrid.Children.Add(T);
+
+                        }
+                        if (j == 0 && i == vrsta)
+                        {
+                            TextBlock T = new TextBlock();
+
+                            T.FontSize = 9;
+
+                            T.Text = $"{dvodi[i, j]}";
+                            T.Foreground = Brushes.White;
+                            T.Background = Brushes.Yellow;
+                            Grid.SetRow(T, i);
+
+                            Grid.SetColumn(T, j);
+
+
+                            MatrixGrid.Children.Add(T);
+
+                        }
+
+
+                      
+                        dekodiran.Text = encrypt;
+
+                    }
+
+                }
+
+                await Task.Delay(2000);
+                vratiPoz();
+
+            }
+
+
+
+
 
         }
 
