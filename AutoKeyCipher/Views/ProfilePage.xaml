@@ -126,8 +126,9 @@
                             </Grid.RowDefinitions>
                             
                             <Button x:Name="StepOver" Click="StepOver_Click" Content="StepOver" Width="70" Height="40" HorizontalAlignment="Left" Background="Red" Foreground="White" Visibility="Hidden" />
+                            <Button x:Name="Retry" Click="Retry_Click" Content="Retry" Width="70" Height="40" HorizontalAlignment="Left" Background="Red" Foreground="White" Visibility="Hidden" />
                             <Button x:Name="Skip" Click="Skip_Click" Content="ToEnd" Width="70" Height="40" HorizontalAlignment="Left" Background="Red" Margin="0 5 0 0" Foreground="White" Grid.Row="1" Visibility="Hidden" />
-                            <TextBlock Visibility="Hidden" x:Name="t" HorizontalAlignment="Center" FontSize="22" Grid.Column="1" Margin="5" Text="Dekodiran text:"/>
+                            <TextBlock Visibility="Hidden" x:Name="t" HorizontalAlignment="Center" FontSize="22" Grid.Column="1" Margin="5" Text="Kodiran text:"/>
                             <TextBlock  x:Name="dekodiran" Margin="5" HorizontalAlignment="Center" FontSize="26" Grid.Column="1" Grid.Row="1"/>
                         </Grid>
 

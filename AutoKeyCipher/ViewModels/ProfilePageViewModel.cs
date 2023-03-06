@@ -21,6 +21,7 @@ namespace AutoKeyCipher.ViewModels
         public ICommand StartDecodingCommand { get; }
 
 
+
         
 
       
@@ -116,9 +117,9 @@ namespace AutoKeyCipher.ViewModels
 
 
 
-
-
-
+         
+      
+        
 
 
     }

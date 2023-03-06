@@ -34,7 +34,7 @@ namespace AutoKeyCipher.Services.UsersProvider
 
         private static User ToUser(UserDTO r)
         {
-            return new User(r.Name, r.UserName, r.Email, r.Password);
+            return new User(r.Name, r.UserName, r.Email, r.Password,r.IsAdmin);
         }
     }
 }

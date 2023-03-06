@@ -20,19 +20,11 @@
             <DataTemplate DataType="{x:Type vms:MakeRegistrationViewModel}">
                 <views:RegisterView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vms:AllUsersListingViewModel}">
-                <views:AllUsersView/>
-            </DataTemplate>
+           
             <DataTemplate DataType="{x:Type vms:LoginViewModel}">
                 <views:LoginView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vms:ProfilePageViewModel}">
-                <views:ProfilePage/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vms:ListaPretragaViewModel}">
-                <views:ListaPretraga/>
-            </DataTemplate>
+   
 
         </Grid.Resources>
 

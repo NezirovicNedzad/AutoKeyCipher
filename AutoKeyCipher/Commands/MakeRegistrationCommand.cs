@@ -26,7 +26,7 @@ namespace AutoKeyCipher.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrEmpty(_makeRegistrationViewModel.Name) || !string.IsNullOrEmpty(_makeRegistrationViewModel.Email) || !string.IsNullOrEmpty(_makeRegistrationViewModel.Username) || !string.IsNullOrEmpty(_makeRegistrationViewModel.Password) &&  base.CanExecute(parameter);
+            return !string.IsNullOrEmpty(_makeRegistrationViewModel.Name) && !string.IsNullOrEmpty(_makeRegistrationViewModel.Email) && !string.IsNullOrEmpty(_makeRegistrationViewModel.Username) && !string.IsNullOrEmpty(_makeRegistrationViewModel.Password) &&  base.CanExecute(parameter);
         }
         public MakeRegistrationCommand(MakeRegistrationViewModel makeRegistrationViewModel, Global global,
             NavigationService allReservationService )
@@ -53,9 +53,9 @@ namespace AutoKeyCipher.Commands
         public override async Task ExecuteAsync(object? parameter)
         {
 
-            
+            bool isAdmin = false;
             string sifra = HashPassword();
-            User user = new User(_makeRegistrationViewModel.Name, _makeRegistrationViewModel.Username, _makeRegistrationViewModel.Email, sifra);
+            User user = new User(_makeRegistrationViewModel.Name, _makeRegistrationViewModel.Username, _makeRegistrationViewModel.Email, sifra,isAdmin);
 
             try
             {

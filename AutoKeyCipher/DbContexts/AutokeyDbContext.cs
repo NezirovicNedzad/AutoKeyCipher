@@ -17,6 +17,7 @@ namespace AutoKeyCipher.DbContexts
 
         public DbSet <UserDTO> Users { get; set; }
 
+       public DbSet<Cipher> Ciphers { get; set; }   
 
 
     }

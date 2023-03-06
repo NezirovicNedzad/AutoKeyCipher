@@ -9,20 +9,20 @@ namespace AutoKeyCipher.Models
     public  class Cipher
     {
 
-        public User Sifrer { get; }
+        public Guid Id { get; set; }
 
 
-        public string Keystream { get; }
+        public string Keystream { get; set; }
 
 
-        public string Text { get; }
+        public string Text { get; set; }
 
-        public string Coded { get; }
+        public string Coded { get; set; }
 
 
-        public Cipher(User sifrer, string keystream, string text, string coded)
+        public Cipher(Guid id, string keystream, string text, string coded)
         {
-            Sifrer = sifrer;
+            Id=id;
             Keystream = keystream;
             Text = text;
             Coded = coded;  

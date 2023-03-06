@@ -28,9 +28,10 @@ namespace AutoKeyCipher.Views
         public ProfilePage()
         {
             InitializeComponent();
+            CreateMatrix();
+
         }
 
-        int k=7;
 
         private void CreateMatrix()
         {
@@ -45,14 +46,14 @@ namespace AutoKeyCipher.Views
 
             int brojVrsta = 27;
             int brojKolona = 27;
-            char[,] dvodi = new char[brojVrsta, brojKolona];
+            char[,] matrica = new char[brojVrsta, brojKolona];
 
             int brojac = 0;
             for (int i = 0; i < brojVrsta; i++)
             {
                 for (int j = 0; j < brojKolona; j++)
                 {
-                    dvodi[i, j] = characters[brojac];
+                    matrica[i, j] = characters[brojac];
                     brojac++;
                 }
             }
@@ -77,7 +78,7 @@ namespace AutoKeyCipher.Views
                     T.FontSize = 9;
 
                  
-                    T.Text = $"{dvodi[i, j]}";
+                    T.Text = $"{matrica[i, j]}";
 
 
                    
@@ -98,9 +99,10 @@ namespace AutoKeyCipher.Views
             StepOver.Visibility = Visibility.Visible;
             Skip.Visibility = Visibility.Visible; 
             t.Visibility = Visibility.Visible;
-            Start.Visibility=Visibility.Collapsed;  
-            CreateMatrix();
+            Start.Visibility=Visibility.Collapsed;
 
+
+          
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -109,8 +111,9 @@ namespace AutoKeyCipher.Views
 
             string plainText = Pltxt.Text;  
             string autoKey = Keytxt.Text;
+          
             int len = plainText.Length;
-
+         
             // generating the keystream
             string newKey = autoKey + plainText;
             newKey = newKey.Substring(0, newKey.Length
@@ -278,9 +281,104 @@ namespace AutoKeyCipher.Views
 
             }
 
+          
+                StepOver.Visibility = Visibility.Hidden;
+                Retry.Visibility = Visibility.Visible;
+                Skip.Visibility = Visibility.Hidden;
+            
+            
 
 
 
+
+        }
+
+
+        public void RestartMartrix()
+        {
+            string m = " ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                      "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+             "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            char[] characters = m.ToCharArray();
+
+
+            int brojVrsta = 27;
+            int brojKolona = 27;
+            char[,] dvodi = new char[brojVrsta, brojKolona];
+
+            int brojac = 0;
+            for (int i = 0; i < brojVrsta; i++)
+            {
+                for (int j = 0; j < brojKolona; j++)
+                {
+                    dvodi[i, j] = characters[brojac];
+                    brojac++;
+                }
+            }
+            for (int i = 0; i < 27; i++)
+            {
+                for (int j = 0; j < 27; j++)
+                {
+                   
+
+
+
+                        TextBlock T = new TextBlock();
+
+                        T.FontSize = 9;
+
+                        T.Text = $"{dvodi[i, j ]}";
+                    T.Background = Brushes.White;
+                    T.Foreground = Brushes.Black;
+                       
+                        
+
+
+
+
+
+                        Grid.SetRow(T, i);
+
+                        Grid.SetColumn(T, j);
+
+
+                        MatrixGrid.Children.Add(T);
+
+
+
+                 
+
+                    
+
+                }
+
+            }
+
+        }
+        private void Retry_Click(object sender, RoutedEventArgs e)
+        {
+
+            Bord.Visibility = Visibility.Collapsed;
+           
+            Retry.Visibility = Visibility.Hidden;
+            Skip.Visibility = Visibility.Hidden;
+            t.Visibility=Visibility.Hidden;
+            dekodiran.Text = "";
+            Pltxt.Text = "";
+            Keytxt.Text = "";
+
+            RestartMartrix();
+            brojac = 0;
+            Autokey.Text = "";
+            PlainText.Text = "";
+            encrypt = "";
+  
+
+            Start.Visibility = Visibility.Visible;
 
         }
 
@@ -387,6 +485,12 @@ namespace AutoKeyCipher.Views
             }
 
 
+
+            if(encrypt.Length==Autokey.Text.Length) { 
+            Skip.Visibility=Visibility.Hidden;
+                StepOver.Visibility=Visibility.Hidden;  
+Retry.Visibility=Visibility.Visible;
+            }
           
         }
     }

@@ -37,8 +37,8 @@ namespace AutoKeyCipher.Services.UserCreator
                 Name = user.Name,
                 UserName = user.UserName,   
                 Email = user.Email, 
-                Password = user.Password
-                
+                Password = user.Password,
+                IsAdmin=user.IsAdmin
             };
          
                 

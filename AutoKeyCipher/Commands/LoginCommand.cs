@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Windows;
+using AutoKeyCipher.Views;
+using AutoKeyCipher.Stores;
 
 namespace AutoKeyCipher.Commands
 {
@@ -19,15 +21,20 @@ namespace AutoKeyCipher.Commands
 
         private readonly Global _global;
         private readonly NavigationService _allReservationService;
+        private readonly LoginStore _loginStore;
         private readonly LoginViewModel _loginViewModel;
+       private readonly NavigationStore _navigationStore;
 
-        public LoginCommand(LoginViewModel loginViewModel, Global global, NavigationService allReservationService)
+
+        public LoginCommand(LoginViewModel loginViewModel, Global global, NavigationService allReservationService, NavigationStore navigationStore, LoginStore loginStore)
         {
 
-            _loginViewModel=loginViewModel;
+            _loginViewModel = loginViewModel;
             _global = global;
             _allReservationService = allReservationService;
+            _navigationStore = navigationStore;
             _loginViewModel.PropertyChanged += OnViewModelPropertyChanged;
+            _loginStore = loginStore;
         }
 
 
@@ -87,7 +94,7 @@ namespace AutoKeyCipher.Commands
             
             var exists = count.Count(count => count.Email == _loginViewModel.Email && count.Password==sifra );
 
-
+            
             _loginViewModel.ErrorMessage = string.Empty;
 
 
@@ -97,6 +104,14 @@ namespace AutoKeyCipher.Commands
                 MessageBox.Show("Uspesno ste se ulogovali!", "Sucess", MessageBoxButton.OK, MessageBoxImage.Information);
                 _allReservationService.Navigate();
 
+                ProfileWindow p = new ProfileWindow()
+                {
+                    DataContext = new MainViewModel(_navigationStore)
+                };
+
+
+                p.Show();
+               
             }
             else if (!IsValidEmail(_loginViewModel.Email))
 

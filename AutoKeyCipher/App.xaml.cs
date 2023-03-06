@@ -5,7 +5,9 @@ using AutoKeyCipher.Services.UserCreator;
 using AutoKeyCipher.Services.UsersProvider;
 using AutoKeyCipher.Stores;
 using AutoKeyCipher.ViewModels;
+using AutoKeyCipher.Views;
 using Microsoft.EntityFrameworkCore;
+using Prism.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,8 +25,11 @@ namespace AutoKeyCipher
     {
 
         private readonly Global _global;
+        private readonly LoginStore _loginStore;    
         private readonly NavigationStore _navigationStore;
-        private readonly AutokeyDbContextFactory _autokeyDbContextFactory;    
+        private readonly AutokeyDbContextFactory _autokeyDbContextFactory;
+
+      
         private readonly string connection_string = "Server=localhost\\SQLEXPRESS;Database=AutoKeyCipher;Trusted_Connection=True;";
         public App()
         {
@@ -35,6 +40,7 @@ namespace AutoKeyCipher
             IUserCreator userCreator = new DatabaseUserCreator(_autokeyDbContextFactory);
             _global = new Global(userProvider,userCreator);
             _navigationStore = new NavigationStore();
+            _loginStore = new LoginStore("","");
         }
 
 
@@ -56,7 +62,7 @@ namespace AutoKeyCipher
 
           
 
-
+          
             MainWindow = new MainWindow()
             {
 
@@ -64,7 +70,12 @@ namespace AutoKeyCipher
                 DataContext = new MainViewModel(_navigationStore)
             };
 
+            ProfileWindow p = new ProfileWindow()
+            {
+                DataContext = new MainViewModel(_navigationStore)
+            };
             MainWindow.Show();
+          
 
             base.OnStartup(e);
         }
@@ -78,22 +89,23 @@ namespace AutoKeyCipher
         }
 
 
-        private AllUsersListingViewModel CreateReservationViewModel()
-        {
-            return  AllUsersListingViewModel.LoadViewModel(_global, new NavigationService(_navigationStore, CreateRegistrationViewModel));
-        }
-
+        
         private LoginViewModel CreateLoginViewModel()
         {
 
+            return new LoginViewModel(_global,new NavigationService(_navigationStore,CreateRegistrationViewModel), new NavigationService(_navigationStore, CreateProfileViewModel),_navigationStore,_loginStore);
 
-            return new LoginViewModel(_global,new NavigationService(_navigationStore,CreateRegistrationViewModel), new NavigationService(_navigationStore, CreateProfileViewModel));
+           
         }
         private ProfilePageViewModel CreateProfileViewModel()
         {
 
 
+            MainWindow.Close();
+
             return new ProfilePageViewModel(new NavigationService(_navigationStore,CreateListPretragaViewModel));
+           
+
         }
         private ListaPretragaViewModel CreateListPretragaViewModel()
         {
@@ -101,5 +113,11 @@ namespace AutoKeyCipher
 
             return new ListaPretragaViewModel();
         }
+
+
+
+        
+    
+    
     }
 }

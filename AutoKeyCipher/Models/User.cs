@@ -21,13 +21,16 @@ namespace AutoKeyCipher.Models
         public string Email { get;  }
         public string Password { get; }
 
+        public bool IsAdmin { get; }    
 
-        public User(string name, string userName, string email, string password)
+
+        public User(string name, string userName, string email, string password,bool isAdmin)
         {
             Name = name;
             UserName = userName;
             Email = email;
             Password = password;
+          IsAdmin = isAdmin;    
         }
 
 

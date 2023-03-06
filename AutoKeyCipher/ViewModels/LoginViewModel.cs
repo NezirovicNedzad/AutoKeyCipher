@@ -1,6 +1,9 @@
 ﻿using AutoKeyCipher.Commands;
 using AutoKeyCipher.Models;
 using AutoKeyCipher.Services;
+using AutoKeyCipher.Stores;
+using AutoKeyCipher.Views;
+using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,12 +79,18 @@ namespace AutoKeyCipher.ViewModels
 
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }
-        public LoginViewModel(Global _global, NavigationService registrationViewNavigationService,NavigationService allListingViewNavService)
+
+
+       
+        public void ShowWindow()
+        { 
+        }
+        public LoginViewModel(Global _global, NavigationService registrationViewNavigationService,NavigationService allListingViewNavService,NavigationStore _navigationStore,LoginStore loginStore)
         {
 
             RegisterCommand = new NavigateCommand(registrationViewNavigationService);
 
-            LoginCommand = new LoginCommand(this, _global,allListingViewNavService);
+            LoginCommand = new LoginCommand(this, _global,allListingViewNavService,_navigationStore,loginStore);
 
 
            
