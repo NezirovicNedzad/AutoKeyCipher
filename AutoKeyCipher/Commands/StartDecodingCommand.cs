@@ -9,7 +9,8 @@ namespace AutoKeyCipher.Commands
 {
     public class StartDecodingCommand : CommandBase
     {
-
+        private static String alphabet
+    = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         private readonly ProfilePageViewModel _viewModel;
 
@@ -23,23 +24,43 @@ namespace AutoKeyCipher.Commands
         public override void Execute(object? parameter)
         {
 
+            string plainText = _viewModel.Plaintext.Replace(" ", "");
+            string autoKey = _viewModel.Key.Replace(" ","");
 
 
-            int len = _viewModel.Plaintext.Length;
-       
+
             // generating the keystream
-            string newKey = _viewModel.Key +_viewModel.Plaintext;
+            string newKey = autoKey + plainText;
+
+
+
+
             newKey = newKey.Substring(0, newKey.Length
-            - _viewModel.Key.Length);
+          - autoKey.Length);
 
-        
-          string k=newKey.Replace(" ", "");
-            k = k.Substring(0,k.Length);
+_viewModel.AutoKey = newKey.ToUpper();
+            _viewModel.PlaintextUpper = plainText.ToUpper();
 
+
+
+            int len = plainText.Length;
+       
+         
+            string encryptMsg = "";
+
+            // applying encryption algorithm
+          
            
-            _viewModel.AutoKey=k.ToUpper();
-            _viewModel.PlaintextUpper = _viewModel.Plaintext.ToUpper().Replace(" ", "");
 
+
+            for (int x = 0; x < len; x++)
+            {
+                int first = alphabet.IndexOf(plainText.ToUpper()[x]);
+                int second = alphabet.IndexOf(newKey.ToUpper()[x]);
+                int total = (first + second) % 26;
+                encryptMsg += alphabet[total];
+            }
+            _viewModel.Coded = encryptMsg;
            
             
 

@@ -1,9 +1,12 @@
 ﻿using AutoKeyCipher.Commands;
 using AutoKeyCipher.Models;
 using AutoKeyCipher.Services;
+using AutoKeyCipher.Stores;
+using AutoKeyCipher.Views;
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,23 +18,33 @@ namespace AutoKeyCipher.ViewModels
     public class ProfilePageViewModel : ViewModelBase
     {
 
- 
+      
+        Action CloseAction { get; set; }
+
 
         public ICommand ListCommand { get; }
         public ICommand StartDecodingCommand { get; }
+        public ICommand AddCipherCommand { get; }
+
+     
+
+
+        public ICommand LogoutCommand { get; }
+
+        public ICommand AutoKeyCommand { get; }
 
 
 
-        
-
-      
-
-        public ProfilePageViewModel(NavigationService allListingViewNavigationService)
+        public ProfilePageViewModel(NavigationService allListingViewNavigationService, NavigationService LoginViewModelNavigationService, NavigationService AutoKeyViewNavigationService, Global global, NavigationStore navigationStore,ProfileWindow profileWindow,MainWindow main)
 
 
         {
-            StartDecodingCommand=new StartDecodingCommand(this);
-            ListCommand = new  NavigateCommand(allListingViewNavigationService);
+            StartDecodingCommand = new StartDecodingCommand(this);
+            ListCommand = new NavigateCommand(allListingViewNavigationService);
+            AddCipherCommand = new AddCipherCommand(global, this);
+            AutoKeyCommand = new NavigateCommand(AutoKeyViewNavigationService);
+            LogoutCommand = new LogoutCommand(global, LoginViewModelNavigationService,navigationStore,profileWindow,main);
+            
         }
 
         private string _plaintext;
@@ -76,6 +89,28 @@ namespace AutoKeyCipher.ViewModels
             {
                 _plaintextUpper = value;
                 OnPropertyChanged(nameof(PlaintextUpper));
+            }
+        }
+
+        private string _coded;
+
+
+
+
+
+        public string Coded
+        {
+
+
+            get
+            {
+                return _coded;
+            }
+
+            set
+            {
+                _coded = value;
+                OnPropertyChanged(nameof(Coded));
             }
         }
 

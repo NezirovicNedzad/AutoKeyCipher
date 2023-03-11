@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,9 @@ namespace AutoKeyCipher.Models
 {
     public  class Cipher
     {
-
-        public Guid Id { get; set; }
+        [Key]
+       public Guid Guid { get; set; } 
+        public string Email { get; set; }
 
 
         public string Keystream { get; set; }
@@ -20,13 +22,15 @@ namespace AutoKeyCipher.Models
         public string Coded { get; set; }
 
 
-        public Cipher(Guid id, string keystream, string text, string coded)
+        public Cipher(Guid guid, string email, string keystream, string text, string coded)
         {
-            Id=id;
+            Guid = guid;
+            Email = email;
             Keystream = keystream;
             Text = text;
-            Coded = coded;  
-        }
+            Coded = coded;
 
+
+        }
     }
 }

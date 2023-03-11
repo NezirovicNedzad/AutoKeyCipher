@@ -16,7 +16,7 @@
         <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter"></converters:InverseBooleanToVisibilityConverter>
     </UserControl.Resources>
     
-    <Grid >
+    <Grid Margin="0 30 0 0" >
 
       
 
@@ -33,7 +33,7 @@
 
         <TextBlock  Text="AutoKeyCipher" FontSize="25" HorizontalAlignment="Center" Style="{StaticResource Cipher}"  Grid.Row="0" />
         <Image Grid.Row="1" Width="120" Height="120" Margin="10" Source="{StaticResource login}"/>
-        <TextBlock Text="Login" FontSize="20"  Grid.Row="2" HorizontalAlignment="Center"/>
+        <TextBlock Text="Login" Foreground="White" FontSize="20"  Grid.Row="2" HorizontalAlignment="Center"/>
 
 
 
@@ -54,10 +54,10 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock  Grid.Column="1"  Text="Email"/>
+            <TextBlock Foreground="White" Grid.Column="1"  Text="Email"/>
             <TextBox  Width="350" Grid.Column="1" Grid.Row="2" Padding="3" Margin="5" Text="{Binding Email,UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock  Grid.Column="1" Grid.Row="3"  Text="Password"/>
+            <TextBlock Foreground="White" Grid.Column="1" Grid.Row="3"  Text="Password"/>
             <TextBox  Width="350" Grid.Column="1" Grid.Row="4" Padding="3" Margin="5" Text="{Binding Password,UpdateSourceTrigger=PropertyChanged}" />
             <Button Command="{Binding LoginCommand}" Content="Uloguj se" Grid.Column="1" Grid.Row="5" Margin="5"   />
 
@@ -68,8 +68,9 @@
                     <ColumnDefinition Width="auto"/>
                  
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Nemate nalog?"/>
-                <Button Command="{Binding RegisterCommand}" Width="120" FontSize="13" Grid.Column="1"  Content="Registrujte se "  Style="{StaticResource Reg}"   />
+                <TextBlock Foreground="White" Margin="10" Text="Nemate nalog?"/>
+                <TextBlock Foreground="White" Margin="10" Text="Nemate nalog?"/>
+                <Button  Command="{Binding RegisterCommand}" Width="120" FontSize="13" Grid.Column="1" Background="#04d9ff" Foreground="White"  Margin="10" Content="Registrujte se "  Style="{StaticResource Reg}"   />
             </Grid>
             
 

@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoKeyCipher.Stores
+namespace AutoKeyCipher.Models
 {
-    public class LoginStore
-    {
-        public string Password { get; set; }    
-        public string Email { get; set; }
+    public class Account : DomainObjectId
 
-       
-        public LoginStore(string password, string email)
+    {
+        
+
+        public string Email { get; set; }
+        public string Password { get; set; }
+
+        public Account(string email, string password)
         {
-            Password = password;
             Email = email;
+            Password = password;
         }
     }
 }

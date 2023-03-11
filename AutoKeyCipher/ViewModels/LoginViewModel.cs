@@ -55,6 +55,9 @@ namespace AutoKeyCipher.ViewModels
             }
         }
 
+       
+
+
 
         public string _errorMessage;
         public string ErrorMessage
@@ -85,12 +88,12 @@ namespace AutoKeyCipher.ViewModels
         public void ShowWindow()
         { 
         }
-        public LoginViewModel(Global _global, NavigationService registrationViewNavigationService,NavigationService allListingViewNavService,NavigationStore _navigationStore,LoginStore loginStore)
+        public LoginViewModel(Global _global, NavigationService registrationViewNavigationService,NavigationService allListingViewNavService, NavigationService adminNavService, NavigationStore _navigationStore,ProfileWindow p)
         {
-
+            
             RegisterCommand = new NavigateCommand(registrationViewNavigationService);
 
-            LoginCommand = new LoginCommand(this, _global,allListingViewNavService,_navigationStore,loginStore);
+            LoginCommand = new LoginCommand(this, _global,allListingViewNavService,_navigationStore,p,adminNavService);
 
 
            

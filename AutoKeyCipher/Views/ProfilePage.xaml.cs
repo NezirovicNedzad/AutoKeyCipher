@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoKeyCipher.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,14 @@ namespace AutoKeyCipher.Views
     /// </summary>
     public partial class ProfilePage : UserControl
     {
+
+        private string m = " ABCDEFGHIJKLMNOPQRSTUVWXYZAABCDEFGHIJKLMNOPQRSTUVWXYZBBCDEFGHIJKLMNOPQRSTUVWXYZACCDEFGHIJKLMNOPQRSTUVWXYZAB" +
+                    "DDEFGHIJKLMNOPQRSTUVWXYZABCEEFGHIJKLMNOPQRSTUVWXYZABCDFFGHIJKLMNOPQRSTUVWXYZABCDEGGHIJKLMNOPQRSTUVWXYZ" +
+          "ABCDEFHHIJKLMNOPQRSTUVWXYZABCDEFGIIJKLMNOPQRSTUVWXYZABCDEFGHJJKLMNOPQRSTUVWXYZABCDEFGHIKKLMNOPQRSTUVWXYZ" +
+          "ABCDEFGHIJLLMNOPQRSTUVWXYZABCDEFGHIJKMMNOPQRSTUVWXYZABCDEFGHIJKLNNOPQRSTUVWXYZABCDEFGHIJKLMOOPQRSTUVWXYZ" +
+          "ABCDEFGHIJKLMNPPQRSTUVWXYZABCDEFGHIJKLMNOQQRSTUVWXYZABCDEFGHIJKLMNOPRRSTUVWXYZABCDEFGHIJKLMNOPQSSTUVWXYZ" +
+           "ABCDEFGHIJKLMNOPQRTTUVWXYZABCDEFGHIJKLMNOPQRSUUVWXYZABCDEFGHIJKLMNOPQRSTVVWXYZABCDEFGHIJKLMNOPQRSTUWWXYZ" +
+          "ABCDEFGHIJKLMNOPQRSTUVXXYZABCDEFGHIJKLMNOPQRSTUVWYYZABCDEFGHIJKLMNOPQRSTUVWXZZABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int vrsta, kolona;
         int brojac = 0;
         string encrypt;
@@ -28,20 +37,14 @@ namespace AutoKeyCipher.Views
         public ProfilePage()
         {
             InitializeComponent();
-            CreateMatrix();
+             CreateMatrix();
+
+
 
         }
-
-
         private void CreateMatrix()
         {
-            string m= " ABCDEFGHIJKLMNOPQRSTUVWXYZAABCDEFGHIJKLMNOPQRSTUVWXYZBBCDEFGHIJKLMNOPQRSTUVWXYZACCDEFGHIJKLMNOPQRSTUVWXYZAB"+
-                      "DDEFGHIJKLMNOPQRSTUVWXYZABCEEFGHIJKLMNOPQRSTUVWXYZABCDFFGHIJKLMNOPQRSTUVWXYZABCDEGGHIJKLMNOPQRSTUVWXYZ"+
-            "ABCDEFHHIJKLMNOPQRSTUVWXYZABCDEFGIIJKLMNOPQRSTUVWXYZABCDEFGHJJKLMNOPQRSTUVWXYZABCDEFGHIKKLMNOPQRSTUVWXYZ" +
-            "ABCDEFGHIJLLMNOPQRSTUVWXYZABCDEFGHIJKMMNOPQRSTUVWXYZABCDEFGHIJKLNNOPQRSTUVWXYZABCDEFGHIJKLMOOPQRSTUVWXYZ" +
-            "ABCDEFGHIJKLMNPPQRSTUVWXYZABCDEFGHIJKLMNOQQRSTUVWXYZABCDEFGHIJKLMNOPRRSTUVWXYZABCDEFGHIJKLMNOPQSSTUVWXYZ" +
-             "ABCDEFGHIJKLMNOPQRTTUVWXYZABCDEFGHIJKLMNOPQRSUUVWXYZABCDEFGHIJKLMNOPQRSTVVWXYZABCDEFGHIJKLMNOPQRSTUWWXYZ" +
-            "ABCDEFGHIJKLMNOPQRSTUVXXYZABCDEFGHIJKLMNOPQRSTUVWYYZABCDEFGHIJKLMNOPQRSTUVWXZZABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
             char[] characters = m.ToCharArray();
 
             int brojVrsta = 27;
@@ -58,7 +61,7 @@ namespace AutoKeyCipher.Views
                 }
             }
 
-            for (int i = 0; i <28 ; i++)
+            for (int i = 0; i < 28; i++)
             {
                 RowDefinition rowDef = new RowDefinition();
                 MatrixGrid.RowDefinitions.Add(rowDef);
@@ -70,95 +73,126 @@ namespace AutoKeyCipher.Views
             // dodavanje elemenata u matricu
             for (int i = 0; i < 27; i++)
             {
-                for (int j = 0; j <27; j++)
+                for (int j = 0; j < 27; j++)
                 {
 
-                    TextBlock T= new TextBlock();
+                    TextBlock T = new TextBlock();
 
                     T.FontSize = 9;
 
-                 
+
                     T.Text = $"{matrica[i, j]}";
 
 
-                   
-                   
+
+
                     Grid.SetRow(T, i);
                     Grid.SetColumn(T, j);
-                  
+
                     MatrixGrid.Children.Add(T);
                 }
             }
 
         }
-        
+
         private void Button_Click(object sender, RoutedEventArgs e)
-        { 
+        {
             Bord.Visibility = Visibility.Visible;
-            StartD.Visibility = Visibility.Collapsed;   
+            StartD.Visibility = Visibility.Collapsed;
             StepOver.Visibility = Visibility.Visible;
-            Skip.Visibility = Visibility.Visible; 
+            Skip.Visibility = Visibility.Visible;
             t.Visibility = Visibility.Visible;
-            Start.Visibility=Visibility.Collapsed;
+            Start.Visibility = Visibility.Collapsed;
 
 
-          
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 
-
-            string plainText = Pltxt.Text;  
-            string autoKey = Keytxt.Text;
-          
-            int len = plainText.Length;
-         
-            // generating the keystream
-            string newKey = autoKey + plainText;
-            newKey = newKey.Substring(0, newKey.Length
-            - autoKey.Length);
-
-
-            string k = newKey.Replace(" ", "");
-            k = k.Substring(0, k.Length);
-
-            Autokey.Text = k.ToUpper();
-            PlainText.Text = plainText.ToUpper().Replace(" ", "");
-
-
-
-
             
-            StartD.Visibility = Visibility.Visible;
+            
+            string plainText = Pltxt.Text.Replace(" ", "");
+            string autoKey = Keytxt.Text;
+
+               if (plainText.Length == 0)
+            {
+
+                PlaintxtError.Text = "Moraju biti popunjena sva polja";
+                PlaintxtError.Foreground = Brushes.Red;
+            }
+            else if (autoKey.Length == 0)
+            {
+
+                KeytxtError.Text = "Moraju biti popunjena sva polja";
+                KeytxtError.Foreground = Brushes.Red;
+            }
+            else  if (autoKey.Contains(" "))
+            {
+                KeytxtError.Text = "Ključ mora biti jedna reč";
+                KeytxtError.Foreground = Brushes.Red;
+            }
+            else if (autoKey.Length > plainText.Length)
+            {
+                KeytxtError.Text = "Ključ mora biti manje dužine od samog texta";
+                KeytxtError.Foreground = Brushes.Red;
+            }
+            
+          
+            else
+            {
+                PlaintxtError.Text = "";
+                KeytxtError.Text = "";
+                // generating the keystream
+                string newKey = autoKey + plainText;
+
+
+
+                string k = newKey.Replace(" ", "");
+
+                k = k.Substring(0, k.Length
+              - autoKey.Length);
+
+                k = k.Substring(0, k.Length);
+
+                Autokey.Text = k.ToUpper();
+                PlainText.Text = plainText.ToUpper().Replace(" ", "");
+
+
+
+
+
+                StartD.Visibility = Visibility.Visible;
+            }
         }
 
         public void vratiPoz()
         {
-          
+
             string autokey = Autokey.Text;
-            string plainText=PlainText.Text;
+            string plainText = PlainText.Text;
 
 
             if (brojac < autokey.Length)
             {
-                int first = alphabet.IndexOf(plainText[brojac])+1;//index vrste
+                int first = alphabet.IndexOf(plainText[brojac]) + 1;//index vrste
                 int second = alphabet.IndexOf(autokey[brojac]);//index kol
 
-             
-                vrsta = first;
-                kolona = second+1;
 
-                int index = (first + second-1) % 26;
+                vrsta = first;
+                kolona = second + 1;
+
+                int index = (first + second - 1) % 26;
 
                 encrypt += alphabet[index];
 
 
-                 
-                
+
+
 
                 brojac += 1;
-               
+
 
 
             }
@@ -169,13 +203,7 @@ namespace AutoKeyCipher.Views
         {
 
 
-            string m = " ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                    "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-          "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-          "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-          "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-           "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-          "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
             char[] characters = m.ToCharArray();
 
 
@@ -269,7 +297,7 @@ namespace AutoKeyCipher.Views
                         }
 
 
-                      
+
                         dekodiran.Text = encrypt;
 
                     }
@@ -281,12 +309,12 @@ namespace AutoKeyCipher.Views
 
             }
 
-          
-                StepOver.Visibility = Visibility.Hidden;
-                Retry.Visibility = Visibility.Visible;
-                Skip.Visibility = Visibility.Hidden;
-            
-            
+
+            StepOver.Visibility = Visibility.Hidden;
+            Retry.Visibility = Visibility.Visible;
+            Skip.Visibility = Visibility.Hidden;
+
+
 
 
 
@@ -296,13 +324,7 @@ namespace AutoKeyCipher.Views
 
         public void RestartMartrix()
         {
-            string m = " ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                      "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-             "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
             char[] characters = m.ToCharArray();
 
 
@@ -323,36 +345,36 @@ namespace AutoKeyCipher.Views
             {
                 for (int j = 0; j < 27; j++)
                 {
-                   
 
 
 
-                        TextBlock T = new TextBlock();
 
-                        T.FontSize = 9;
+                    TextBlock T = new TextBlock();
 
-                        T.Text = $"{dvodi[i, j ]}";
+                    T.FontSize = 9;
+
+                    T.Text = $"{dvodi[i, j]}";
                     T.Background = Brushes.White;
                     T.Foreground = Brushes.Black;
-                       
-                        
 
 
 
 
 
-                        Grid.SetRow(T, i);
-
-                        Grid.SetColumn(T, j);
 
 
-                        MatrixGrid.Children.Add(T);
+                    Grid.SetRow(T, i);
+
+                    Grid.SetColumn(T, j);
+
+
+                    MatrixGrid.Children.Add(T);
 
 
 
-                 
 
-                    
+
+
 
                 }
 
@@ -363,10 +385,10 @@ namespace AutoKeyCipher.Views
         {
 
             Bord.Visibility = Visibility.Collapsed;
-           
+
             Retry.Visibility = Visibility.Hidden;
             Skip.Visibility = Visibility.Hidden;
-            t.Visibility=Visibility.Hidden;
+            t.Visibility = Visibility.Hidden;
             dekodiran.Text = "";
             Pltxt.Text = "";
             Keytxt.Text = "";
@@ -376,23 +398,18 @@ namespace AutoKeyCipher.Views
             Autokey.Text = "";
             PlainText.Text = "";
             encrypt = "";
-  
+
 
             Start.Visibility = Visibility.Visible;
 
         }
 
+        
+
         private void StepOver_Click(object sender, RoutedEventArgs e)
         {
 
 
-            string m = " ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-                      "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-             "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ";
             char[] characters = m.ToCharArray();
 
 
@@ -415,35 +432,35 @@ namespace AutoKeyCipher.Views
             {
                 for (int j = 0; j < 27; j++)
                 {
-                    if(i==vrsta && j==kolona    )
-                    { 
-                    
-                        
-                     
+                    if (i == vrsta && j == kolona)
+                    {
+
+
+
                         TextBlock T = new TextBlock();
 
                         T.FontSize = 9;
 
-                        T.Text = $"{dvodi[i, j-1]}";
+                        T.Text = $"{dvodi[i, j - 1]}";
                         T.Foreground = Brushes.White;
-                        T.Background =Brushes.Red;
+                        T.Background = Brushes.Red;
 
 
-                      
+
 
 
 
                         Grid.SetRow(T, i);
-                       
+
                         Grid.SetColumn(T, j);
 
 
-                          MatrixGrid.Children.Add(T);
+                        MatrixGrid.Children.Add(T);
 
-                      
+
 
                     }
-                    if (i == 0 && j==kolona)
+                    if (i == 0 && j == kolona)
                     {
                         TextBlock T = new TextBlock();
 
@@ -481,17 +498,19 @@ namespace AutoKeyCipher.Views
                     dekodiran.Text = encrypt;
 
                 }
-               
+
             }
 
 
 
-            if(encrypt.Length==Autokey.Text.Length) { 
-            Skip.Visibility=Visibility.Hidden;
-                StepOver.Visibility=Visibility.Hidden;  
-Retry.Visibility=Visibility.Visible;
+            if (encrypt.Length == Autokey.Text.Length)
+            {
+                Skip.Visibility = Visibility.Hidden;
+                StepOver.Visibility = Visibility.Hidden;
+                Retry.Visibility = Visibility.Visible;
             }
-          
+
         }
+
     }
 }

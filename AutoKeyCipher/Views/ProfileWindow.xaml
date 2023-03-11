@@ -8,12 +8,15 @@
          xmlns:views="clr-namespace:AutoKeyCipher.Views"
          xmlns:vms="clr-namespace:AutoKeyCipher.ViewModels"  
           WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
         Title="ProfileWindow"   Width="{x:Static SystemParameters.FullPrimaryScreenWidth}"  
             Height="{x:Static SystemParameters.FullPrimaryScreenHeight}" 
+    
         >
-    <Grid>
 
+        <Grid>
 
+ 
         <Grid.Resources>
 
             <DataTemplate DataType="{x:Type vms:MakeRegistrationViewModel}">
@@ -22,9 +25,7 @@
             <DataTemplate DataType="{x:Type vms:AllUsersListingViewModel}">
                 <views:AllUsersView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vms:LoginViewModel}">
-                <views:LoginView/>
-            </DataTemplate>
+         
             <DataTemplate DataType="{x:Type vms:ProfilePageViewModel}">
                 <views:ProfilePage/>
             </DataTemplate>
@@ -33,9 +34,24 @@
                 <views:ListaPretraga/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type vms:AutoKeyViewModel}">
+                <views:AutoKeyView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:AdminViewModel}">
+                <views:AdminProfileView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vms:AdminAutoKeyViewModel}">
+                <views:AdminAutoKey/>
+            </DataTemplate>
         </Grid.Resources>
 
         <ContentControl Content="{Binding CurrentViewModel}"/>
+        <Ellipse Fill="Red" Width="20" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown" Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+
+        <Ellipse Fill="Yellow" Width="20" Margin="0 0 25 0" MouseLeftButtonDown="Ellipse_MouseLeftButtonDown_1"   Height="20" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+
         <Border CornerRadius="20"/>
     </Grid>
 </Window>

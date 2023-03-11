@@ -1,4 +1,5 @@
-﻿<Application x:Class="AutoKeyCipher.App"
+﻿
+    <Application x:Class="AutoKeyCipher.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AutoKeyCipher"
@@ -20,6 +21,11 @@
             <BitmapImage x:Key="home" UriSource="Images/Home2.png"></BitmapImage>
             <BitmapImage x:Key="logout" UriSource="Images/shutdown_def.png"></BitmapImage>
             <BitmapImage x:Key="login" UriSource="Images/Login2.jpg"></BitmapImage>
+            <BitmapImage x:Key="tabula" UriSource="Images/tabula.png"></BitmapImage>
+            <BitmapImage x:Key="primer" UriSource="Images/Screenshot (42).png"></BitmapImage>
+            <BitmapImage x:Key="kraj" UriSource="Images/Cipher.png"></BitmapImage>
+            <BitmapImage x:Key="log" UriSource="Images/KOD.jpg"></BitmapImage>
+
             <BitmapImage x:Key="setting" UriSource="Images/img_setting.png"></BitmapImage>
             <BitmapImage x:Key="lista" UriSource="Images/img_order.png"></BitmapImage>
 

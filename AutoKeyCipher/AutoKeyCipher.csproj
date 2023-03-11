@@ -10,21 +10,29 @@
   <ItemGroup>
     <None Remove="Fonts\Rubik-Medium.ttf" />
     <None Remove="Fonts\Rubik-Regular.ttf" />
+    <None Remove="Images\Cipher.png" />
     <None Remove="Images\Home2.png" />
     <None Remove="Images\img_order.png" />
     <None Remove="Images\img_setting.png" />
+    <None Remove="Images\KOD.jpg" />
     <None Remove="Images\Login2.jpg" />
+    <None Remove="Images\Screenshot %2842%29.png" />
     <None Remove="Images\shutdown_def.png" />
+    <None Remove="Images\tabula.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Fonts\Rubik-Medium.ttf" />
     <Resource Include="Fonts\Rubik-Regular.ttf" />
+    <Resource Include="Images\Cipher.png" />
     <Resource Include="Images\Home2.png" />
     <Resource Include="Images\img_order.png" />
     <Resource Include="Images\img_setting.png" />
+    <Resource Include="Images\KOD.jpg" />
     <Resource Include="Images\Login2.jpg" />
+    <Resource Include="Images\Screenshot (42).png" />
     <Resource Include="Images\shutdown_def.png" />
+    <Resource Include="Images\tabula.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -21,20 +21,30 @@ namespace AutoKeyCipher.Commands
 
         private readonly Global _global;
         private readonly NavigationService _allReservationService;
-        private readonly LoginStore _loginStore;
+        private readonly NavigationService _adminReservationService;
+        public User _user;
+         public ProfileWindow _profileWindow;
+        public MainWindow _mainWindow;
         private readonly LoginViewModel _loginViewModel;
+
        private readonly NavigationStore _navigationStore;
 
 
-        public LoginCommand(LoginViewModel loginViewModel, Global global, NavigationService allReservationService, NavigationStore navigationStore, LoginStore loginStore)
+        public LoginCommand(LoginViewModel loginViewModel, Global global, NavigationService allReservationService, NavigationStore navigationStore,  ProfileWindow profileWindow, NavigationService adminNavService)
         {
 
             _loginViewModel = loginViewModel;
             _global = global;
             _allReservationService = allReservationService;
+            _adminReservationService = adminNavService;
             _navigationStore = navigationStore;
             _loginViewModel.PropertyChanged += OnViewModelPropertyChanged;
-            _loginStore = loginStore;
+           
+            
+           
+
+            _profileWindow = profileWindow;
+           
         }
 
 
@@ -81,9 +91,7 @@ namespace AutoKeyCipher.Commands
 
         public override async Task ExecuteAsync(object parameter)
         {
-
-
-
+            
           
 
            
@@ -100,17 +108,43 @@ namespace AutoKeyCipher.Commands
 
             if (exists == 1)
             {
-
+              
                 MessageBox.Show("Uspesno ste se ulogovali!", "Sucess", MessageBoxButton.OK, MessageBoxImage.Information);
-                _allReservationService.Navigate();
 
-                ProfileWindow p = new ProfileWindow()
+
+                
+                
+
+
+                User user= await _global.GetUser(_loginViewModel.Email);
+
+              
+
+                Account account = new Account(_user.Email, _user.Password);
+                await _global.AddAccount(account
+                    );
+                _user.SetUserEmail(user.Email);
+           
+                _profileWindow = new ProfileWindow()
                 {
                     DataContext = new MainViewModel(_navigationStore)
                 };
+                if (_user.IsAdmin == true)
+                {
+                    _profileWindow.Show();
+                    _adminReservationService.Navigate();
 
+                    
 
-                p.Show();
+                }
+                else
+                {
+                    _allReservationService.Navigate();
+                    _profileWindow.Show();
+                }
+
+                
+           
                
             }
             else if (!IsValidEmail(_loginViewModel.Email))

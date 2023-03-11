@@ -1,6 +1,7 @@
 ﻿using AutoKeyCipher.DbContexts;
 using AutoKeyCipher.DTOs;
 using AutoKeyCipher.Models;
+using AutoKeyCipher.Services.UsersProvider;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,32 +9,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoKeyCipher.Services.UsersProvider
+namespace AutoKeyCipher.Services.SingleUserProvider
 {
-    public class DatabaseUsersProvider : IUserProvider
+    public class DatabaseSingleUserProv : ISingleUserProv
     {
+
         private readonly AutokeyDbContextFactory _dbContextFactory;
 
-        public DatabaseUsersProvider(AutokeyDbContextFactory dbContextFactory)
+        public DatabaseSingleUserProv(AutokeyDbContextFactory context)
         {
-            _dbContextFactory = dbContextFactory;
+            _dbContextFactory = context;
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<User> GetSingleUser(string Email)
         {
             using (AutokeyDbContext context = _dbContextFactory.CreateDbContext())
             {
-              
                 IEnumerable<UserDTO> userDTOs = await context.Users.ToListAsync();
-           
-                return userDTOs.Select(r => ToUser(r));
+                UserDTO user = await context.Users.FirstAsync(us => us.Email == Email);
+               
+                User _user=ToUser(user);
 
+                return _user; 
             }
+
+            
         }
+
 
         private static User ToUser(UserDTO r)
         {
-            return new User(r.Name, r.UserName, r.Email, r.Password,r.IsAdmin);
+            return new User(r.Name, r.UserName, r.Email, r.Password, r.IsAdmin);
         }
     }
 }

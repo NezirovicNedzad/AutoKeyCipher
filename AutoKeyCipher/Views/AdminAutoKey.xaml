@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="AutoKeyCipher.Views.AdminAutoKey"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutoKeyCipher.Views"
+             xmlns:Menu="clr-namespace:AutoKeyCipher.Utilities"
+             mc:Ignorable="d" 
+             
+             >
+    <Grid>
+
+        <Border Background="White" CornerRadius="20"/>
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid HorizontalAlignment="Left" Width="228">
+
+                <Border Background="#272B2F" CornerRadius="20,0,0,0"/>
+                <StackPanel Height="400">
+
+                    
+                    <Menu:Btn Style="{StaticResource BtnStyle}"  Command="{Binding AdminListCommand}" >
+
+                        <Grid>
+                            <Image Source="{StaticResource lista}" Style="{StaticResource Image_Style}"/>
+                            <TextBlock Text="Lista pretraga" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+
+
+                    </Menu:Btn>
+
+
+
+                    <Menu:Btn Style="{StaticResource BtnStyle}" IsChecked="True">
+
+                        <Grid>
+                            <Image Source="{StaticResource setting}" Style="{StaticResource Image_Style}" />
+                            <TextBlock Text="Autokey" Style="{StaticResource Text_Style}"/>
+                        </Grid>
+
+                    </Menu:Btn>
+                    
+
+
+                </StackPanel>
+
+
+
+
+            </Grid>
+            <Grid Grid.Column="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="AutoKeyCipher" Margin="10" HorizontalAlignment="Center"  Style="{StaticResource Cipher}"/>
+
+
+                <Grid Grid.Row="1">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <TextBlock HorizontalAlignment="Center"  Margin="10" FontSize="13"  Text="Šifra autoključa (također poznata kao autoklavna šifra) je šifra  koja uključuje poruku (čisti tekst) u ključ. Ključ se generira iz poruke &#10; na neki automatiziran način, ponekad odabirom određenih slova  iz teksta ili, češće, dodavanjem kratkog ključa na početak poruke.&#10;
+
+Postoje dva oblika šifre autoključa: šifra ključ-autoključ i šifra autoključa  teksta. Šifra ključ-autoključ koristi prethodne članove toka ključeva da &#10; odredi sljedeći element u toku ključeva. Tekst-autoključ koristi prethodni tekst poruke da odredi sledeći element u toku ključeva. &#10;
+U modernoj kriptografiji, samosinhronizirajuće stream šifre su šifre s autoključem." />
+                    <TextBlock Grid.Row="1" Margin="0 10 0 0" HorizontalAlignment="Center" Text="Ovu šifru je 1586. godine izmislio Blaise de Vigenère sa recipročnom tablicom od deset slova alfabeta.&#10; Vigenèreova verzija koristila je unapred dogovorenih slova alfabeta  kao početni jezik stvarajući ključ tako što je zapisao to slovo, a zatim i ostatak poruke. &#10;Popularniji autoključevi koriste tabula recta, kvadrat sa 26 kopija abecede, prvi red koji počinje s 'A', sljedeći red počinje s 'B' itd. &#10; Umjesto jednog slova koristi se kratka dogovorena ključna riječ , a ključ se generiše tako što se zapiše početni, a zatim i ostatak poruke,  kao u Vigenèreovoj  &#10; verziji. Za šifriranje otvorenog teksta nalaze se red s  prvim slovom poruke i kolona s prvim slovom ključa. Slovo u kojem se red i  &#10; kolona križaju je slovo šifriranog teksta. &#10;Autokey šifrer počinje sa relativno kratkom kljucnom reči(ključom) koji mora biti manje dužine od teksta i  tekstom koji se unosi.Na osnovu toga se kreira  &#10; autokey na način da je autokey dužine teksta i jednak je ključu koji se unese i ostatak se dodaje sa početka unetog ključa.Primer:                     
+   "/>
+
+                    <Image Grid.Column="0" VerticalAlignment="Bottom" Source="{StaticResource primer}" Width="700" Height="140" Margin="0 0 0 20" Grid.Row="1"/>
+
+                    <Image Grid.Column="1"  Grid.Row="1" Height="300" Width="400" Source="{StaticResource tabula}" />
+                    <TextBlock Grid.Row="2" Text="Dalje se posmatra tabula recta povši od prvog slova plaintexta i autokeya (u našem slučaju m i k ).Posmatramo prvu vrstu i u njoj slovo M koje je početno &#10; za text,i prvu kolonu u njoj slovo K.Mesto preklapanja kolone koja počinje sa početnim slovom texta i vrste koja počinje sa početnim slovom autokeya je prvo &#10; slovo šifrirane reči odnosno u našem slučaju W.Kada odradimo ovo do za svako slovo dobijamo: "/>
+                    <Image Grid.Row="3" Margin="0 10" Width="700 " Height="140" Source="{StaticResource kraj}"/>
+                    <TextBlock Text="Tabula recta" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" />
+                   
+                </Grid>
+
+
+
+
+
+            </Grid>
+
+
+        </Grid>
+
+
+    </Grid>
+</UserControl>

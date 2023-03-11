@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,28 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AutoKeyCipher
+namespace AutoKeyCipher.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AutoKeyView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AutoKeyView : UserControl
     {
-        public MainWindow()
+        public AutoKeyView()
         {
             InitializeComponent();
+           
         }
 
-      
 
-        private void Ellipse_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Application.Current.Shutdown();
-        }
 
-        private void Ellipse_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
-        {
-            this.WindowState = System.Windows.WindowState.Minimized;
-        }
+
+    
     }
 }
+

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoKeyCipher.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,8 +25,17 @@ namespace AutoKeyCipher.Views
             InitializeComponent();
         }
 
+      
+        private void Ellipse_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
 
-     
+        }
+
+        private void Ellipse_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = System.Windows.WindowState.Minimized;
+        }
     }
 
    

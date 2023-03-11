@@ -14,11 +14,11 @@ namespace AutoKeyCipher.ViewModels
 
 
         private readonly NavigationStore _navigationStore;
-
+        
         public MainViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
-
+          
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
@@ -29,10 +29,6 @@ namespace AutoKeyCipher.ViewModels
         }
 
         public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
-
-
-       
-
 
 
     }

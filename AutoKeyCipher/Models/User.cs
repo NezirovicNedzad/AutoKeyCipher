@@ -14,16 +14,16 @@ namespace AutoKeyCipher.Models
 
        
      
-        public string Name { get;  }    
+        public string Name { get; set; }    
 
 
-        public string UserName { get;  }
-        public string Email { get;  }
-        public string Password { get; }
+        public string UserName { get; set; }
+        public string Email { get; set;  }
+        public string Password { get; set; }
 
-        public bool IsAdmin { get; }    
+        public bool IsAdmin { get; set; }    
 
-
+   
         public User(string name, string userName, string email, string password,bool isAdmin)
         {
             Name = name;
@@ -31,6 +31,10 @@ namespace AutoKeyCipher.Models
             Email = email;
             Password = password;
           IsAdmin = isAdmin;    
+        }
+        public void SetUserEmail(string email)
+        {
+            Email = email;
         }
 
 
